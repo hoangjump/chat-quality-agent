@@ -221,7 +221,7 @@ func (a *Analyzer) runJobInternalExt(ctx context.Context, job models.Job, maxCon
 				SenderType: m.SenderType,
 				SenderName: m.SenderName,
 				Content:    m.Content,
-				SentAt:     m.SentAt.Format("15:04"),
+				SentAt:     pkg.ToVN(m.SentAt).Format("15:04"),
 			}
 		}
 		transcript := ai.FormatChatTranscript(chatMessages)
@@ -599,7 +599,7 @@ func (a *Analyzer) runBatchMode(ctx context.Context, provider ai.AIProvider, job
 				SenderType: m.SenderType,
 				SenderName: m.SenderName,
 				Content:    m.Content,
-				SentAt:     m.SentAt.Format("15:04"),
+				SentAt:     pkg.ToVN(m.SentAt).Format("15:04"),
 			}
 		}
 		prepared = append(prepared, convWithTranscript{

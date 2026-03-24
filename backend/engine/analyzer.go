@@ -122,6 +122,9 @@ func (a *Analyzer) runJobInternalExt(ctx context.Context, job models.Job, maxCon
 
 	// Determine time range
 	isTestRun := maxConversations > 0
+	if isTestRun {
+		excludeAnalyzed = true
+	}
 	var since time.Time
 	if sinceOverride != nil {
 		since = *sinceOverride

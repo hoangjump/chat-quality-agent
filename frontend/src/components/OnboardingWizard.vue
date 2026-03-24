@@ -9,7 +9,7 @@
       <v-icon>mdi-rocket-launch</v-icon>
     </template>
     <div class="onboarding-steps d-flex align-center ga-2">
-      <span class="text-body-2 font-weight-medium mr-2" style="white-space: nowrap;">Bắt đầu:</span>
+      <span class="text-body-2 font-weight-medium" style="white-space: nowrap;">Bắt đầu:</span>
       <v-chip
         v-for="step in steps"
         :key="step.key"
@@ -33,7 +33,7 @@
       </v-chip>
     </div>
     <template #actions>
-      <v-btn variant="text" size="small" @click="dismiss">Ẩn</v-btn>
+      <v-btn icon="mdi-close" variant="text" size="x-small" @click="dismiss" />
     </template>
   </v-banner>
 </template>

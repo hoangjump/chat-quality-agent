@@ -238,7 +238,7 @@
                           style="max-width: 200px; max-height: 200px; border-radius: 8px; cursor: pointer;"
                           @click="openUrl(getAttachmentUrl(att))"
                           @error="onImageError($event, att)"
-                          :ref="(el: any) => loadAuthImage(getAttachmentUrl(att))"
+                          :ref="(_el: any) => loadAuthImage(getAttachmentUrl(att))"
                         />
                         <v-chip v-else size="x-small" variant="tonal" color="grey">
                           <v-icon start size="12">mdi-image</v-icon>

@@ -1,5 +1,39 @@
 # Changelog
 
+## v2026.03.26
+
+### Tinh nang moi
+- **Thong bao cap nhat**: Banner thong bao khi co phien ban moi + changelog + huong dan update
+- **Nut Dung job**: Co the dung job dang chay tu giao dien (#7)
+- **Docs + Version**: Hien thi o sidebar, truy cap nhanh tai lieu va changelog
+
+### Bug Fixes
+- **Job bi treo**: Fix infinite loop khi batchSize=0, them context cancellation check, check loi DB query (#7)
+- **Facebook token**: Fix loi "must be called with Page Access Token" — tu dong exchange User Token thanh Page Token (#12, #13, #14)
+- **Gemini models**: Thay gemini-2.0-flash (deprecated) bang gemini-2.5-flash/pro
+- **Lich chay**: Khong luu duoc "Lich chay" khi sua cong viec (#9)
+- **AI model**: Job detail hien dung AI model tu Settings global thay vi gia tri cu (#33)
+- **Ty gia**: Dashboard dung ty gia tu tenant settings thay vi hardcode 26000 VND (#23)
+- **Install script**: Fix bi treo tren Ubuntu do interactive prompt (#35)
+- **Anh trong danh gia**: Hien thi anh/sticker/file trong "Dien bien cuoc chat" + lightbox zoom (#39)
+
+### Bao mat
+- Them security log khi tu choi truy cap file (IDOR fix)
+- IDOR: Kiem tra tenant ownership khi serve file (#22)
+- Token refresh: Fix race condition gay logout bat ngo (#26)
+- OAuth state URL-encoded (#29)
+- Goroutine timeout cho TriggerJob va TestRunJob (#30, #31)
+- Gioi han per_page max 100 tranh DB exhaustion (#32)
+- Infinite polling: Frontend tu dung poll sau timeout (#27, #28)
+
+### Documentation
+- Sua huong dan lay Telegram Group ID — dung Telegram Web (#36)
+- Them huong dan chay localhost (Zalo OA ho tro callback localhost) (#34)
+- Sua docs Zalo OA: localhost khong can SSL (#37)
+- Don gian hoa cai dat Watchtower — 1 lenh curl thay vi sua YAML thu cong
+
+---
+
 ## v2026.03.24
 
 ### Bug Fixes

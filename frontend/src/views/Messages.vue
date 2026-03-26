@@ -192,12 +192,12 @@
             <v-tab value="qc">
               <v-icon start size="small">mdi-clipboard-check</v-icon>
               Đánh giá
-              <v-chip v-if="qcGroups.length" size="x-small" color="grey" variant="tonal" class="ml-1">{{ qcGroups.length }}</v-chip>
+              <v-chip v-if="qcGroups.length" size="x-small" color="primary" variant="flat" class="ml-1">{{ qcGroups.length }}</v-chip>
             </v-tab>
             <v-tab value="classification">
               <v-icon start size="small">mdi-tag-multiple</v-icon>
               Phân loại
-              <v-chip v-if="classGroups.length" size="x-small" color="grey" variant="tonal" class="ml-1">{{ classGroups.length }}</v-chip>
+              <v-chip v-if="classGroups.length" size="x-small" color="primary" variant="flat" class="ml-1">{{ classGroups.length }}</v-chip>
             </v-tab>
           </v-tabs>
 

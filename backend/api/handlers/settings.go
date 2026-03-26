@@ -62,6 +62,7 @@ func SaveAISettings(c *gin.Context) {
 		Provider  string `json:"provider" binding:"required,oneof=claude gemini"`
 		APIKey    string `json:"api_key" binding:"required"`
 		Model     string `json:"model"`
+		BaseURL   string `json:"base_url"`
 		BatchMode string `json:"batch_mode"`
 		BatchSize string `json:"batch_size"`
 	}
@@ -79,6 +80,9 @@ func SaveAISettings(c *gin.Context) {
 	if req.Model != "" {
 		upsertSetting(tenantID, "ai_model", req.Model, nil)
 	}
+
+	// Save base URL (plain, optional — empty string clears it)
+	upsertSetting(tenantID, "ai_base_url", req.BaseURL, nil)
 
 	// Save API key (encrypted)
 	encrypted, err := pkg.Encrypt([]byte(req.APIKey), cfg.EncryptionKey)

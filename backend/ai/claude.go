@@ -14,9 +14,10 @@ type ClaudeProvider struct {
 	apiKey    string
 	model     string
 	maxTokens int
+	baseURL   string
 }
 
-func NewClaudeProvider(apiKey, model string, maxTokens int) *ClaudeProvider {
+func NewClaudeProvider(apiKey, model string, maxTokens int, baseURL string) *ClaudeProvider {
 	if model == "" {
 		model = "claude-sonnet-4-6"
 	}
@@ -27,15 +28,20 @@ func NewClaudeProvider(apiKey, model string, maxTokens int) *ClaudeProvider {
 		apiKey:    apiKey,
 		model:     model,
 		maxTokens: maxTokens,
+		baseURL:   baseURL,
 	}
 }
 
 func (c *ClaudeProvider) AnalyzeChat(ctx context.Context, systemPrompt string, chatTranscript string) (AIResponse, error) {
 	return withRetry(ctx, "claude", func() (AIResponse, error) {
-		client := anthropic.NewClient(
+		opts := []option.RequestOption{
 			option.WithAPIKey(c.apiKey),
 			option.WithHTTPClient(claudeHTTPClient),
-		)
+		}
+		if c.baseURL != "" {
+			opts = append(opts, option.WithBaseURL(c.baseURL))
+		}
+		client := anthropic.NewClient(opts...)
 
 		message, err := client.Messages.New(ctx, anthropic.MessageNewParams{
 			Model:     anthropic.Model(c.model),

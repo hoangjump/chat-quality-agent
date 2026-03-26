@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
@@ -70,7 +71,9 @@ func CheckVersion(c *gin.Context) {
 		return
 	}
 
-	hasUpdate := release.TagName != "" && release.TagName != AppVersion && release.TagName != "v"+AppVersion
+	currentNorm := strings.TrimPrefix(strings.TrimSpace(AppVersion), "v")
+	latestNorm := strings.TrimPrefix(strings.TrimSpace(release.TagName), "v")
+	hasUpdate := latestNorm != "" && latestNorm != currentNorm
 	result := map[string]interface{}{
 		"current":       AppVersion,
 		"latest":        release.TagName,

@@ -8,27 +8,35 @@ import (
 )
 
 type GeminiProvider struct {
-	apiKey string
-	model  string
+	apiKey  string
+	model   string
+	baseURL string
 }
 
-func NewGeminiProvider(apiKey, model string) *GeminiProvider {
+func NewGeminiProvider(apiKey, model string, baseURL string) *GeminiProvider {
 	if model == "" {
-		model = "gemini-2.0-flash"
+		model = "gemini-2.5-flash"
 	}
 	return &GeminiProvider{
-		apiKey: apiKey,
-		model:  model,
+		apiKey:  apiKey,
+		model:   model,
+		baseURL: baseURL,
 	}
 }
 
 func (g *GeminiProvider) AnalyzeChat(ctx context.Context, systemPrompt string, chatTranscript string) (AIResponse, error) {
 	return withRetry(ctx, "gemini", func() (AIResponse, error) {
-		client, err := genai.NewClient(ctx, &genai.ClientConfig{
+		clientCfg := &genai.ClientConfig{
 			APIKey:     g.apiKey,
 			Backend:    genai.BackendGeminiAPI,
 			HTTPClient: NewHTTPClientWithTimeout(),
-		})
+		}
+		if g.baseURL != "" {
+			clientCfg.HTTPOptions = genai.HTTPOptions{
+				BaseURL: g.baseURL,
+			}
+		}
+		client, err := genai.NewClient(ctx, clientCfg)
 		if err != nil {
 			return AIResponse{}, fmt.Errorf("gemini client error: %w", err)
 		}
